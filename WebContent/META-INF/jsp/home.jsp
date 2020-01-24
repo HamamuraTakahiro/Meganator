@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-a
+
+<a href = https://mgt-net.com/>メガ・テクノロジー</a>
 
 </body>
 </html>
