@@ -38,9 +38,7 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 *
-		 */
+
 		QuestionLogic questionLogic = new QuestionLogic();
 		List<Question> tenQuestions = questionLogic.choiceRamdomQuestions();
 
@@ -59,10 +57,8 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-いくつめの質問か数えながら次の質問を出す。
-10個目の質問が終わったら ResultLogic.choicetResult()でオススメたちを取得してsession scopeに格納し、 Result.javaに渡す
-*/
+		//64行目getParameterの引数を未設定です。あとで修正してください。
+
 		HttpSession session = request.getSession();
 		List<Integer> answerlist = (List<Integer>)session.getAttribute("answers");
 		answerlist.add(Integer.parseInt(request.getParameter("JSPのコードに対応させる")));
