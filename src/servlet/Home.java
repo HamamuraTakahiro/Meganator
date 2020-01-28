@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import model.Question;
 import model.QuestionLogic;
+import model.Result;
+import model.ResultLogic;
 
 /**
  * Servlet implementation class Home
@@ -42,6 +47,8 @@ public class Home extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("tenQuestions", tenQuestions);
 
+		session.setAttribute("answers", new ArrayList<Integer>());
+
 		request.setAttribute("questionText", tenQuestions.get(0));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
@@ -52,8 +59,29 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+いくつめの質問か数えながら次の質問を出す。
+10個目の質問が終わったら ResultLogic.choicetResult()でオススメたちを取得してsession scopeに格納し、 Result.javaに渡す
+*/
+		HttpSession session = request.getSession();
+		List<Integer> answerlist = (List<Integer>)session.getAttribute("answers");
+		answerlist.add(Integer.parseInt(request.getParameter("JSPのコードに対応させる")));
+		session.setAttribute("answers", answerlist);
 
+		int count = answerlist.size();
+		if(count >= 10) {
+			ResultLogic resultLogic = new ResultLogic();
+			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerlist):
+			session.setAttribute("results", results);
+			response.sendRedirect("/Meganator/Result");
+		}
 
+		List<Question> tenQuestions = (List<Question>)session.getAttribute("tenQuestions");
+
+		request.setAttribute("questionText", tenQuestions.get(count));
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+		dispatcher.forward(request, response);
 
 
 	}
