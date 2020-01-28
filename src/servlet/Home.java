@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import model.Question;
 import model.QuestionLogic;
+import model.Result;
+import model.ResultLogic;
 
 /**
  * Servlet implementation class Home
@@ -33,19 +38,17 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* 10個の質問をsession scopeにList<Question>型として格納。
-		 * QuestionLogic.choiceRandomQuestions()List<Question>を取得。
-		 * 変数 questions に格納。2. 1つ目の質問を出す。
-		 *  QuestioLogic.choiceRandomQuestions()を呼ぶ
-		 */
-		QuestionLogic qLogic = new QuestionLogic();
-		List<Question> questions = qLogic.choiceRamdomQuestions();
+
+		QuestionLogic questionLogic = new QuestionLogic();
+		List<Question> tenQuestions = questionLogic.choiceRamdomQuestions();
 
 		HttpSession session = request.getSession();
-		session.setAttribute("questions", questions/* 10個の質問 */);
+		session.setAttribute("tenQuestions", tenQuestions);
 
-		request.setAttribute("questionText", questions.get(0));
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/home.jsp");
+		session.setAttribute("answers", new ArrayList<Integer>());
+
+		request.setAttribute("questionText", tenQuestions.get(0));
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -54,8 +57,27 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//64行目getParameterの引数を未設定です。あとで修正してください。
 
+		HttpSession session = request.getSession();
+		List<Integer> answerlist = (List<Integer>)session.getAttribute("answers");
+		answerlist.add(Integer.parseInt(request.getParameter("JSPのコードに対応させる")));
+		session.setAttribute("answers", answerlist);
 
+		int count = answerlist.size();
+		if(count >= 10) {
+			ResultLogic resultLogic = new ResultLogic();
+			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerlist):
+			session.setAttribute("results", results);
+			response.sendRedirect("/Meganator/Result");
+		}
+
+		List<Question> tenQuestions = (List<Question>)session.getAttribute("tenQuestions");
+
+		request.setAttribute("questionText", tenQuestions.get(count));
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+		dispatcher.forward(request, response);
 
 
 	}
