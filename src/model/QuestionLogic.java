@@ -40,7 +40,7 @@ public class QuestionLogic {
 			}
 		//配列に変換
 		Integer[] i = new Integer[idListSet.size()];
-		idListSet.toArray(idList);
+		idListSet.toArray(i);
 
 		//int配列に変換
 		int[] idList = new int[idListSet.size()];
@@ -48,7 +48,7 @@ public class QuestionLogic {
 
 		//Questionリストに格納
 		ArrayList<Question> questions = new ArrayList<Question>();
-		questions.addAll(managerDAO.selectQuestions(idList));
+		questions.addAll(meganatorDAO.selectQuestions(idList));
 
 		return questions;
 
