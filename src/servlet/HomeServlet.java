@@ -60,10 +60,13 @@ public class HomeServlet extends HttpServlet {
 		answerList.add(Integer.parseInt(request.getParameter("answer")));
 		session.setAttribute("answerList", answerList);
 
+
 		int count = answerList.size();
+
+
 		if(count >= 10) {
 			ResultLogic resultLogic = new ResultLogic();
-			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerList):
+			List<Result> results = resultLogic.choiceResults((List<Question>)session.getAttribute("tenQuestions"), answerList);
 			session.setAttribute("results", results);
 			response.sendRedirect("/Meganator/ResultServlet");
 		}
