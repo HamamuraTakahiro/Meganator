@@ -45,7 +45,7 @@ public class Home extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("tenQuestions", tenQuestions);
 
-		session.setAttribute("answers", new ArrayList<Integer>());
+		session.setAttribute("answerList", new ArrayList<Integer>());
 
 		request.setAttribute("questionText", tenQuestions.get(0));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
@@ -57,17 +57,16 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//64行目getParameterの引数を未設定です。あとで修正してください。
 
 		HttpSession session = request.getSession();
-		List<Integer> answerlist = (List<Integer>)session.getAttribute("answers");
-		answerlist.add(Integer.parseInt(request.getParameter("JSPのコードに対応させる")));
-		session.setAttribute("answers", answerlist);
+		List<Integer> answerList = (List<Integer>)session.getAttribute("answerList");
+		answerList.add(Integer.parseInt(request.getParameter("answer")));
+		session.setAttribute("answerList", answerList);
 
-		int count = answerlist.size();
+		int count = answerList.size();
 		if(count >= 10) {
 			ResultLogic resultLogic = new ResultLogic();
-			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerlist):
+			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerList):
 			session.setAttribute("results", results);
 			response.sendRedirect("/Meganator/Result");
 		}
