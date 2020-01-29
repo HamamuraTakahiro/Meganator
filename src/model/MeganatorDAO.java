@@ -37,6 +37,9 @@ public class MeganatorDAO {
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
 			PreparedStatement stt = conn.prepareStatement(sql);
 
+			for(int i=0;i<ids.length;i++) {
+				stt.setInt(i+1, ids[i]);
+			}
 			ResultSet rs = stt.executeQuery();
 
 			while(rs.next()) {
@@ -95,7 +98,7 @@ public class MeganatorDAO {
 		List<Result> list = new ArrayList<>();
 
 		//SQL文
-		String sql ="SELECT * FROM RESULTS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
+		String sql ="SELECT * FROM RESULTS";
 
 		//DB接続～結果の取得～returnまで
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
