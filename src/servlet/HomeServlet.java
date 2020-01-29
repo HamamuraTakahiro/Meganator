@@ -23,13 +23,13 @@ import model.ResultLogic;
  * Servlet implementation class Home
  */
 @WebServlet("/Home")
-public class Home extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public HomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -69,7 +69,7 @@ public class Home extends HttpServlet {
 			ResultLogic resultLogic = new ResultLogic();
 			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerlist):
 			session.setAttribute("results", results);
-			response.sendRedirect("/Meganator/Result");
+			response.sendRedirect("/Meganator/ResultServlet");
 		}
 
 		List<Question> tenQuestions = (List<Question>)session.getAttribute("tenQuestions");
