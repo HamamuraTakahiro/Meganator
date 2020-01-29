@@ -9,23 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerDAO {
+	//DB接続用定数
 	static final String DATABASE_NAME = "Meganator";
 	static final String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
 	static final String ADDRESS = "jdbc:mySQL://localhost/";
 	static final String URL = ADDRESS+DATABASE_NAME+PROPATIES;
+	//DB接続用・ユーザ定数
 	static final String USER = "root";
 	static final String PASS = "root";
 
+	/**
+	 * int配列の数値に対応したIDを持つデータをQUESTIONSテーブルから呼び、
+	 * Qusestionクラスに格納してリストで返す
+	 * @param ids
+	 * QUESTIONSテーブルのIDに対応した値をもつint配列
+	 * @return
+	 * idsの要素に対応する質問データを持ったQuestionのリスト
+	 */
 	public List<Question> selectQuestions(int[] ids) {
+		//返り値用変数
 		List<Question> list = new ArrayList<>();
+
+		//SQL文
 		String sql ="SELECT * FROM QUESTIONS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
 
+		//DB接続～returnまで
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
 			PreparedStatement stt = conn.prepareStatement(sql);
 
 			ResultSet rs = stt.executeQuery();
 
 			while(rs.next()) {
+				//ヒットした数だけリストに格納
 				int id = rs.getInt(1);
 				String question_text = rs.getString(2);
 				int happy = rs.getInt(3);
@@ -34,9 +49,11 @@ public class ManagerDAO {
 				int joy = rs.getInt(6);
 				list.add(new Question(id, question_text, happy, mad, sad, joy));
 			}
+			//引数と返り値のサイズが合わない場合
 			if(list.size() != ids.length) {
 				return null;
 			}
+			//成功時
 			return list;
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -46,7 +63,12 @@ public class ManagerDAO {
 
 	}
 
+	/**
+	 * 質問の総数を返すメソッド
+	 * @return
+	 */
 	public int countAllQuestions() {
+		//SQL文
 		String sql ="SELECT COUNT(*) FROM QUESTIONS";
 
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
@@ -55,6 +77,7 @@ public class ManagerDAO {
 			if(rs.next()) {
 				return rs.getInt(1);
 			}
+			//数なので不正の場合負の値を返すように
 			return -1;
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -63,10 +86,18 @@ public class ManagerDAO {
 		}
 	}
 
+	/**
+	 * 結果DBの全体をリスト形式で返すメソッド
+	 * @return
+	 */
 	public List<Result> selectAllResults(){
+		//返り値用変数
 		List<Result> list = new ArrayList<>();
+
+		//SQL文
 		String sql ="SELECT * FROM RESULTS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
 
+		//DB接続～結果の取得～returnまで
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
 			PreparedStatement stt = conn.prepareStatement(sql);
 
@@ -90,6 +121,10 @@ public class ManagerDAO {
 		}
 	}
 
+	/**
+	 * テスト用メインメソッド
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		Connection conn = null;
