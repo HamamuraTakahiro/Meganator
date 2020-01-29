@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import model.Question;
 import model.QuestionLogic;
 import model.Result;
@@ -63,10 +61,13 @@ public class HomeServlet extends HttpServlet {
 		answerList.add(Integer.parseInt(request.getParameter("answer")));
 		session.setAttribute("answerList", answerList);
 
+
 		int count = answerList.size();
+
+
 		if(count >= 10) {
 			ResultLogic resultLogic = new ResultLogic();
-			List<Result> results = ResultLogic.choiceResults(session.getAttribute("tenQuestions"), answerList):
+			List<Result> results = resultLogic.choiceResults((List<Question>)session.getAttribute("tenQuestions"), answerList);
 			session.setAttribute("results", results);
 			response.sendRedirect("/Meganator/ResultServlet");
 		}
