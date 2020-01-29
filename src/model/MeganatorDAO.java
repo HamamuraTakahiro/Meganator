@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerDAO {
+public class MeganatorDAO {
 	//DB接続用定数
 	static final String DATABASE_NAME = "Meganator";
 	static final String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
