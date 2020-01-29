@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class QuestionLogic {
+	private final int QUEST_AMOUNT = 10;
 
 	public ArrayList<Question> choiceRamdomQuestions() {
 
@@ -23,7 +24,7 @@ public class QuestionLogic {
 
 
 	//while文でランダムに数字を選出してIdを格納する
-	while(count < numberOfQuestions) {
+	while(count < QUEST_AMOUNT) {
 
 			//Idの範囲内からランダムな数字を選出
 			int currentNum = r.nextInt(numberOfQuestions) + 1;
