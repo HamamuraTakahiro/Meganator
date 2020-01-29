@@ -17,9 +17,9 @@ public class QuestionLogic {
 	int count = 0;
 
 	//DAO用のインスタンスの生成
-	ManagerDAO managerDAO = new ManagerDAO();
+	MeganatorDAO meganatorDAO = new MeganatorDAO();
 	//質問数の設定
-	int numberOfQuestions = managerDAO.countAllQuestions();
+	int numberOfQuestions = meganatorDAO.countAllQuestions();
 
 
 	//while文でランダムに数字を選出してIdを格納する
@@ -39,8 +39,12 @@ public class QuestionLogic {
 				}
 			}
 		//配列に変換
-		Integer[] idList = new Integer[idListSet.size()];
+		Integer[] i = new Integer[idListSet.size()];
 		idListSet.toArray(idList);
+
+		//int配列に変換
+		int[] idList = new int[idListSet.size()];
+		System.arraycopy(i, 0, idList, 0, idListSet.size());
 
 		//Questionリストに格納
 		ArrayList<Question> questions = new ArrayList<Question>();
