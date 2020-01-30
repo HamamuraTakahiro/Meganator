@@ -1,11 +1,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.Question" %>
-<%@ page import="model.Constant_text" %>
+<%@ page import="model.Question"%>
+<%@ page import="config.Constant_text"%>
 <%
-//セッションスコープからインスタンスを取得
- ArrayList<Question> question=(ArrayList<Question>)session.getAttribute(Constant_text.TEN_QUESTIONS);
+	//セッションスコープからインスタンスを取得
+	ArrayList<Question> question = (ArrayList<Question>) session.getAttribute(Constant_text.TEN_QUESTIONS);
 %>
 
 <!DOCTYPE html>
@@ -50,10 +50,14 @@
 								<img src="image/majin.png" alt="魔人" class="imageMajin">
 
 							</div>
-								<% if(question ==null){ %>
+
 							<div class="chatting">
 								<div class="says">
-									<p >
+									<%
+										if (question == null) {
+									%>
+
+									<p id="textdeleate">
 										我が名は「ひ・まじ〜ん」。<br> 私が、主人の暇つぶしを探して見せよう！<br>
 										下の「スタートボタン」を押すがよい！!!!!
 									</p>
@@ -61,9 +65,14 @@
 									<p>
 
 
-									<% }else{%>
-										<p><%=question.get(0).getQuestion_text() %></p>
-									<% }%>
+										<%
+											} else {
+										%>
+									
+									<p id="question"><%=question.get(0).getQuestion_text()%></p>
+									<%
+										}
+									%>
 
 								</div>
 							</div>
