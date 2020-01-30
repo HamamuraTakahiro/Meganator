@@ -1,7 +1,7 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Random;
 
 import dao.MeganatorDAO;
@@ -13,7 +13,7 @@ public class QuestionLogic {
 	public ArrayList<Question> choiceRamdomQuestions() {
 
 	//重複なし乱数格納用のSetの作成
-	HashSet<Integer> idListSet = new HashSet<Integer>();
+	LinkedHashSet<Integer> idListSet = new LinkedHashSet<Integer>();
 	//ランダムインスタンスの作成
 	Random r = new Random();
 
@@ -43,12 +43,14 @@ public class QuestionLogic {
 				}
 			}
 		//配列に変換
-		Integer[] i = new Integer[idListSet.size()];
-		idListSet.toArray(i);
+		Integer[] integerArray = new Integer[idListSet.size()];
+		idListSet.toArray(integerArray);
 
 		//int配列に変換
 		int[] idList = new int[idListSet.size()];
-		System.arraycopy(i, 0, idList, 0, idListSet.size());
+		for(int i=0;i<idListSet.size();i++) {
+			idList[i]=integerArray[i];
+		}
 
 		//Questionリストに格納
 		ArrayList<Question> questions = new ArrayList<Question>();
