@@ -94,7 +94,7 @@ public class ResultLogic {
 	 * 最低[取得件数]個の要素が入ったオススメ内容を示すResultデータ。
 	 * 同率[取得件数]位の要素全てが入る。
 	 */
-	public ArrayList<Result> pickUpResult(ArrayList<Integer> closeness,int number){
+	private ArrayList<Result> pickUpResult(ArrayList<Integer> closeness,int number){
 		//返り値用変数
 		ArrayList<Result> list = new ArrayList<>();
 
