@@ -16,24 +16,15 @@ import model.QuestionLogic;
 import model.Result;
 import model.ResultLogic;
 
-/**
- * Servlet implementation class Home
- */
 @WebServlet("/Home")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public HomeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		QuestionLogic questionLogic = new QuestionLogic();
@@ -43,15 +34,11 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("tenQuestions", tenQuestions);
 
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		/*　変更前
@@ -67,11 +54,8 @@ public class HomeServlet extends HttpServlet {
 		answerList.add(Integer.parseInt(request.getParameter("answer")));
 		session.setAttribute("answerList", answerList);
 
-
 		//質問が何回目か数えてる。
 		int count = answerList.size();
-
-
 		if(count >= 10) {
 			//10個の答えをもらったらResultServlet.javaに処理をリダイレクト
 			ResultLogic resultLogic = new ResultLogic();
@@ -88,7 +72,7 @@ public class HomeServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 
-
 	}
 
 }
+

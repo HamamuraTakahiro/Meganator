@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class QuestionLogic {
+	private final int QUEST_AMOUNT = 10;
 
 	public ArrayList<Question> choiceRamdomQuestions() {
 
@@ -23,7 +24,7 @@ public class QuestionLogic {
 
 
 	//while文でランダムに数字を選出してIdを格納する
-	while(count < numberOfQuestions) {
+	while(count < QUEST_AMOUNT) {
 
 			//Idの範囲内からランダムな数字を選出
 			int currentNum = r.nextInt(numberOfQuestions) + 1;
@@ -40,7 +41,7 @@ public class QuestionLogic {
 			}
 		//配列に変換
 		Integer[] i = new Integer[idListSet.size()];
-		idListSet.toArray(idList);
+		idListSet.toArray(i);
 
 		//int配列に変換
 		int[] idList = new int[idListSet.size()];
@@ -48,7 +49,7 @@ public class QuestionLogic {
 
 		//Questionリストに格納
 		ArrayList<Question> questions = new ArrayList<Question>();
-		questions.addAll(managerDAO.selectQuestions(idList));
+		questions.addAll(meganatorDAO.selectQuestions(idList));
 
 		return questions;
 

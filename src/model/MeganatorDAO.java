@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MeganatorDAO {
 	//DB接続用定数
@@ -26,9 +25,9 @@ public class MeganatorDAO {
 	 * @return
 	 * idsの要素に対応する質問データを持ったQuestionのリスト
 	 */
-	public List<Question> selectQuestions(int[] ids) {
+	public ArrayList<Question> selectQuestions(int[] ids) {
 		//返り値用変数
-		List<Question> list = new ArrayList<>();
+		ArrayList<Question> list = new ArrayList<>();
 
 		//SQL文
 		String sql ="SELECT * FROM QUESTIONS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
@@ -37,6 +36,9 @@ public class MeganatorDAO {
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
 			PreparedStatement stt = conn.prepareStatement(sql);
 
+			for(int i=0;i<ids.length;i++) {
+				stt.setInt(i+1, ids[i]);
+			}
 			ResultSet rs = stt.executeQuery();
 
 			while(rs.next()) {
@@ -90,12 +92,12 @@ public class MeganatorDAO {
 	 * 結果DBの全体をリスト形式で返すメソッド
 	 * @return
 	 */
-	public List<Result> selectAllResults(){
+	public ArrayList<Result> selectAllResults(){
 		//返り値用変数
-		List<Result> list = new ArrayList<>();
+		ArrayList<Result> list = new ArrayList<>();
 
 		//SQL文
-		String sql ="SELECT * FROM RESULTS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
+		String sql ="SELECT * FROM RESULTS";
 
 		//DB接続～結果の取得～returnまで
 		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
