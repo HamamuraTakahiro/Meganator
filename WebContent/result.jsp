@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Result" %>
 <%
@@ -21,6 +22,8 @@
 <body>
 	<div class="container">
 
+		<!-- cardに値を格納してListのサイズ分だけ作成(引数名は仮で入れてます) -->
+
 		<% for(int i = 0; i < resultList.size(); i++) { %>
 
 
@@ -31,7 +34,7 @@
 			<!-- カードの上部に来る画像の設定 -->
 				<div class="position_Box">
 					<div class="center_img">
-						<a href= <% resultList.get(i).getUrl(); %>>
+						<a href= <% resultList.get(i).getlinkUrl(); %>>
 							<img src= <% resultList.get(i).getimagePath %>>
 						</a>
 					</div><!-- /.center_img -->
