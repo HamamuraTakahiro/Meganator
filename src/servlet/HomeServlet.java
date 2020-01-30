@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Question;
-import model.QuestionLogic;
 import model.Result;
-import model.ResultLogic;
+import service.QuestionLogic;
+import service.ResultLogic;
 
 @WebServlet("/Home")
 public class HomeServlet extends HttpServlet {

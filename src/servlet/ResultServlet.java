@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Question;
 import model.Result;
-import model.ResultLogic;
+import service.ResultLogic;
 
 /**
  * Servlet implementation class Result
