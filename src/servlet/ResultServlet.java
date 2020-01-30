@@ -1,11 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Question;
+import model.Result;
+import model.ResultLogic;
 
 /**
  * Servlet implementation class Result
@@ -13,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Result")
 public class ResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,8 +32,20 @@ public class ResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<Question> quests =(ArrayList<Question>)request.getSession().getAttribute("tenQuestions");
+		ArrayList<Integer> answers =(ArrayList<Integer> )request.getSession().getAttribute("answerList");
+		/**
+		 * 差し戻し条件
+		 * ①いずれかがnull
+		 * ②サイズが異なる
+		 * ③どこかにnullの値が入っている
+		 */
+		if(quests == null || answers == null ||quests.size() != answers.size()  || quests.contains(null) || answers.contains(null)) {
+			response.sendRedirect("Home");
+		}else {
+			ArrayList<Result> advice = new ResultLogic().choiceResults(quests, answers);
+			request.getSession().setAttribute("advices", advice);
+		}
 	}
 
 	/**
