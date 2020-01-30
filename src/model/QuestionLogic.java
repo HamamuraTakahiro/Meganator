@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+import dao.MeganatorDAO;
+
 public class QuestionLogic {
 	private final int QUEST_AMOUNT = 10;
 

@@ -1,4 +1,4 @@
-package model;
+package config;
 
 public class Constant_text {
 	public final static String TEN_QUESTIONS = "tenQuestions";

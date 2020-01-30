@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import dao.MeganatorDAO;
+
 public class ResultLogic {
 	/**
 	 * 全Resultデータ保存用。
