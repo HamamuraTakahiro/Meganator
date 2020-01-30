@@ -5,6 +5,7 @@ import static model.Constant_text.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,11 +44,20 @@ public class ResultServlet extends HttpServlet {
 		 * ③どこかにnullの値が入っている
 		 */
 		if(quests == null || answers == null ||quests.size() != answers.size()  || quests.contains(null) || answers.contains(null)) {
+			/*セッションスコープを破棄*/
+			request.getSession().removeAttribute(TEN_QUESTIONS);
+			request.getSession().removeAttribute(ANSWER_LIST);
 			response.sendRedirect("Home");
 		}else {
 			ArrayList<Result> advice = new ResultLogic().choiceResults(quests, answers);
 			request.getSession().setAttribute(ADVICES, advice);
 		}
+		/*セッションスコープを破棄*/
+		request.getSession().removeAttribute(TEN_QUESTIONS);
+		request.getSession().removeAttribute(ANSWER_LIST);
+		/*Result.jspにフォワード*/
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/META-INF/result.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
