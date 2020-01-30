@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -24,6 +24,8 @@
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
+
+				<!-- javaコンパイル用プラグイン -->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
@@ -39,17 +41,19 @@
 						<version>7.3.1</version>
 					</dependency>
 				</dependencies>
-			</plugin>
 
+			</plugin>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin/3.2.3 -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
+
 			</plugin>
 
-			<!--jarファイル作成のためのプラグイン https://devcenter.heroku.com/articles/deploying-java -->
+			<!--jarファイル作成のためのプラグインhttps://devcenter.heroku.com/articles/java-webapp-runner -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -57,12 +61,20 @@
 				<version>3.0.1</version>
 				<executions>
 					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-					</execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.heroku</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>9.0.30.0</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+					
 				</executions>
 			</plugin>
 

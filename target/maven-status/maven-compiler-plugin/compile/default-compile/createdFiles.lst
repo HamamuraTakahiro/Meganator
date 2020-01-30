@@ -1,0 +1,8 @@
+model\ResultLogic.class
+servlet\HomeServlet.class
+model\Constant_text.class
+model\QuestionLogic.class
+model\MeganatorDAO.class
+model\Question.class
+model\Result.class
+servlet\ResultServlet.class
