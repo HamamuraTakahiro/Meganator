@@ -1,8 +1,8 @@
-C:\pleiades\workspace\Meganator\src\model\Constant_text.java
+C:\pleiades\workspace\Meganator\src\service\QuestionLogic.java
+C:\pleiades\workspace\Meganator\src\service\ResultLogic.java
 C:\pleiades\workspace\Meganator\src\model\Question.java
 C:\pleiades\workspace\Meganator\src\servlet\ResultServlet.java
 C:\pleiades\workspace\Meganator\src\model\Result.java
 C:\pleiades\workspace\Meganator\src\servlet\HomeServlet.java
-C:\pleiades\workspace\Meganator\src\model\MeganatorDAO.java
-C:\pleiades\workspace\Meganator\src\model\QuestionLogic.java
-C:\pleiades\workspace\Meganator\src\model\ResultLogic.java
+C:\pleiades\workspace\Meganator\src\config\Constant_text.java
+C:\pleiades\workspace\Meganator\src\dao\MeganatorDAO.java
