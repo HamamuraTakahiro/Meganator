@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +16,12 @@
 <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"> -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="${pageContext.request.contextPath}/js/test.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/test.js"
+	type="text/javascript"></script>
 
 </head>
+
 <body>
 	<div class="mainBackGround">
 		<div class="mainInner">
@@ -52,7 +55,8 @@
 						</div>
 						<form action="servlet/Home" method="get">
 							<div class="formBtn">
-								<input id="show" type="submit" value="スタート" class="formBtn__submit">
+								<input id="show" type="submit" value="スタート"
+									class="formBtn__submit">
 							</div>
 						</form>
 
@@ -71,10 +75,10 @@
 							</p>
 							<p>
 							<form action="servlet/Home" method="post">
-							<div class="formBtn">
-								<input id="Hidebutton" type="submit" value="Result">
-							</div>
-						</form>
+								<div class="formBtn">
+									<input id="Hidebutton" type="submit" value="Result">
+								</div>
+							</form>
 
 
 						</div>
@@ -87,4 +91,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
