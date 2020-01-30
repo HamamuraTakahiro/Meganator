@@ -10,15 +10,17 @@ public class Result implements Serializable {
 	private int mad;
 	private int sad;
 	private int joy;
+	private String imageName;
 
 	public Result() {}
-	public Result(int id, String text, int happy, int mad, int sad, int joy) {
+	public Result(int id, String text, int happy, int mad, int sad, int joy,String imageName) {
 		this.id = id;
 		this.text = text;
 		this.happy = happy;
 		this.mad = mad;
 		this.sad = sad;
 		this.joy = joy;
+		this.imageName = imageName;
 	}
 
 
@@ -45,5 +47,9 @@ public class Result implements Serializable {
 	public int getJoy() { return joy; }
 
 	public void setJoy(int joy) { this.joy = joy; }
+
+	public String getImagePath() { return imageName; }
+
+	public void setImagePath(String imageName) { this.imageName = imageName; }
 
 }
