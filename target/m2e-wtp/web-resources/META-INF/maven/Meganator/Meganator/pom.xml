@@ -31,9 +31,7 @@
 				<configuration>
 					<source>11</source>
 					<target>11</target>
-					<processTypes>
-						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* HomeServlet</web>
-					</processTypes>
+
 				</configuration>
 
 				<!--ASMの導入。（http://atmarksharp.v01.jp/posts/asm-java-bytecode-generator.html） -->
