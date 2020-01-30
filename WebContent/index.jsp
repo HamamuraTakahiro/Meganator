@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.Question" %>
-<%@ page import="model.Constant_text" %>
+<%@ page import="config.Constant_text" %>
 <%
 //セッションスコープからインスタンスを取得
  ArrayList<Question> question=(ArrayList<Question>)session.getAttribute(Constant_text.TEN_QUESTIONS);
