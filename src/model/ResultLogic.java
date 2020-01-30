@@ -57,8 +57,7 @@ public class ResultLogic {
 	 * index:0から順に近さの値を入れたInteger配列
 	 */
 	private ArrayList<Integer> calcAllResultCloseness(Result user){
-		//全データを代入しインスタンス内で扱えるようにする
-		allResultData = new MeganatorDAO().selectAllResults();
+		fillAllResultData();
 		//nullチェック
 		if(allResultData == null) return null;
 
@@ -85,7 +84,7 @@ public class ResultLogic {
 
 	/**
 	 * 計算した近さの値から近いものnumber個のResultを入れたListを返す
-	 * calcAllResultClosenessメソッドを使用したResultLogicインスタンスから呼んでいない場合nullが出る
+	 * fillAllResultDataメソッドを使用したResultLogicインスタンスから呼んでいない場合nullが出る
 	 * @param closeness
 	 * index順に入った近さの値
 	 * @param number
@@ -124,5 +123,10 @@ public class ResultLogic {
 
 		//場合によってはnumber個より多い場合もある。
 		return list;
+	}
+
+	private void  fillAllResultData() {
+		//全データを代入しインスタンス内で扱えるようにする
+		allResultData = new MeganatorDAO().selectAllResults();
 	}
 }
