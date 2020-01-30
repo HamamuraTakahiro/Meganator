@@ -1,5 +1,7 @@
 package servlet;
 
+import static model.Constant_text.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,8 +34,8 @@ public class ResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Question> quests =(ArrayList<Question>)request.getSession().getAttribute("tenQuestions");
-		ArrayList<Integer> answers =(ArrayList<Integer> )request.getSession().getAttribute("answerList");
+		ArrayList<Question> quests =(ArrayList<Question>)request.getSession().getAttribute(TEN_QUESTIONS);
+		ArrayList<Integer> answers =(ArrayList<Integer> )request.getSession().getAttribute(ANSWER_LIST);
 		/**
 		 * 差し戻し条件
 		 * ①いずれかがnull
@@ -44,7 +46,7 @@ public class ResultServlet extends HttpServlet {
 			response.sendRedirect("Home");
 		}else {
 			ArrayList<Result> advice = new ResultLogic().choiceResults(quests, answers);
-			request.getSession().setAttribute("advices", advice);
+			request.getSession().setAttribute(ADVICES, advice);
 		}
 	}
 

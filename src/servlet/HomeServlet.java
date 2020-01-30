@@ -1,7 +1,9 @@
 package servlet;
 
+import static model.Constant_text.*;
+
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,11 +30,11 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		QuestionLogic questionLogic = new QuestionLogic();
-		List<Question> tenQuestions = questionLogic.choiceRamdomQuestions();
+		ArrayList<Question> tenQuestions = questionLogic.choiceRamdomQuestions();
 
 		//10個の質問をsession scopeに格納
 		HttpSession session = request.getSession();
-		session.setAttribute("tenQuestions", tenQuestions);
+		session.setAttribute(TEN_QUESTIONS, tenQuestions);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
@@ -50,24 +52,24 @@ public class HomeServlet extends HttpServlet {
 		 * 答えをリストで１０個まとめて取得。そのまま次の処理へ
 		*/
 		HttpSession session = request.getSession();
-		List<Integer> answerList = (List<Integer>)session.getAttribute("answerList");
-		answerList.add(Integer.parseInt(request.getParameter("answer")));
-		session.setAttribute("answerList", answerList);
+		ArrayList<Integer> answerList = (ArrayList<Integer>)session.getAttribute(ANSWER_LIST);
+		answerList.add(Integer.parseInt(request.getParameter(ANSWER)));
+		session.setAttribute(ANSWER_LIST, answerList);
 
 		//質問が何回目か数えてる。
 		int count = answerList.size();
 		if(count >= 10) {
 			//10個の答えをもらったらResultServlet.javaに処理をリダイレクト
 			ResultLogic resultLogic = new ResultLogic();
-			List<Result> results = resultLogic.choiceResults((List<Question>)session.getAttribute("tenQuestions"), answerList);
-			session.setAttribute("results", results);
+			ArrayList<Result> results = resultLogic.choiceResults((ArrayList<Question>)session.getAttribute(TEN_QUESTIONS), answerList);
+			session.setAttribute(RESULTS, results);
 			response.sendRedirect("/Meganator/ResultServlet");
 		}
 
 		//答えが9個以下の場合はまた尋ねる
-		List<Question> tenQuestions = (List<Question>)session.getAttribute("tenQuestions");
+		ArrayList<Question> tenQuestions = (ArrayList<Question>)session.getAttribute(TEN_QUESTIONS);
 
-		request.setAttribute("questionText", tenQuestions.get(count));
+		request.setAttribute(QUESTION_TEXT, tenQuestions.get(count));
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
