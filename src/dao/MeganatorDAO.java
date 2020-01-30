@@ -36,8 +36,9 @@ public class MeganatorDAO {
 		String sql ="SELECT * FROM QUESTIONS WHERE ID IN (?,?,?,?,?, ?,?,?,?,?)";
 
 		//DB接続～returnまで
-		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
-			PreparedStatement stt = conn.prepareStatement(sql);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
 
 			for(int i=0;i<ids.length;i++) {
 				stt.setInt(i+1, ids[i]);
@@ -60,7 +61,7 @@ public class MeganatorDAO {
 			}
 			//成功時
 			return list;
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return null;
@@ -76,7 +77,9 @@ public class MeganatorDAO {
 		//SQL文
 		String sql ="SELECT COUNT(*) FROM QUESTIONS";
 
-		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(URL,USER,PASS);
 			PreparedStatement stt = conn.prepareStatement(sql);
 			ResultSet rs = stt.executeQuery();
 			if(rs.next()) {
@@ -85,6 +88,10 @@ public class MeganatorDAO {
 			//数なので不正の場合負の値を返すように
 			return -1;
 		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return -1;
+		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return -1;
@@ -103,8 +110,9 @@ public class MeganatorDAO {
 		String sql ="SELECT * FROM RESULTS";
 
 		//DB接続～結果の取得～returnまで
-		try (Connection conn = DriverManager.getConnection(URL,USER,PASS)){
-			PreparedStatement stt = conn.prepareStatement(sql);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
 
 			ResultSet rs = stt.executeQuery();
 
@@ -121,6 +129,10 @@ public class MeganatorDAO {
 
 			return list;
 		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return null;
