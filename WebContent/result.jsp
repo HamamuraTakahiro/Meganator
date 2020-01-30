@@ -7,7 +7,7 @@
 <%@ page import="model.Result" %>
 <%
 	//スコープからリストを取得
-	ArrayList<Result> resultList = (ArrayList<Result>) session.getAttribute(arg0);
+	ArrayList<Result> resultList = (ArrayList<Result>) session.getAttribute("ADVICES");
 %>
 <head>
 <meta charset="UTF-8">
@@ -20,6 +20,11 @@
 
 </head>
 <body>
+
+	<div class="header">
+		<img class="headerImg"  alt="" src="${pageContext.request.contextPath}/image/logo.png">
+	</div>
+
 	<div class="container">
 
 		<!-- cardに値を格納してListのサイズ分だけ作成(引数名は仮で入れてます) -->
@@ -29,24 +34,28 @@
 
 			<!-- section(カード内の要素)タグの設定-->
 
-				<div class="card">
+				<section class="card">
 
 			<!-- カードの上部に来る画像の設定 -->
-				<div class="position_Box">
-					<div class="center_img">
-						<a href= <% resultList.get(i).getlinkUrl(); %>>
-							<img src= <% resultList.get(i).getimagePath %>>
+						<a href= https://www.google.com/?hl=ja>
+							<img src=${pageContext.request.contextPath}/image/<% resultList.get(i).getImagePath(); %>>
 						</a>
-					</div><!-- /.center_img -->
-				</div><!-- /#position_Box -->
 
 			<!-- カードのテキストの設定 -->
 				<div class="card-content">
 					<h1 class="card-title"><% resultList.get(i).getText(); %></h1>
 				</div>
 
-        </div>
+	</div>
 
 <% } %>
+<!-- 各種リンクの作成 -->
+	<div class="Link">
+		<div class="linkImg">
+			<a href=""><img alt="" src=${pageContext.request.contextPath}/image/return.png></a>
+			<a href=""><img alt="" src=${pageContext.request.contextPath}/image/end.png></a>
+		</div>
+	</div>
+
 </body>
 </html>
