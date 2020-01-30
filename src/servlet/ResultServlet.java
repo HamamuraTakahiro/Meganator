@@ -1,6 +1,6 @@
 package servlet;
 
-import static model.Constant_text.*;
+import static config.Constant_text.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Question;
 import model.Result;
-import model.ResultLogic;
+import service.ResultLogic;
 
 /**
  * Servlet implementation class Result
