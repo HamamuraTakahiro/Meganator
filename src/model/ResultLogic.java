@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ResultLogic {
@@ -10,7 +9,7 @@ public class ResultLogic {
 	 * 全Resultデータ保存用。
 	 * calcAllResultClosenessメソッド中で初期化する。
 	 */
-	private List<Result> allResultData;
+	private ArrayList<Result> allResultData;
 
 	/**
 	 * 回答した質問と回答内容からオススメを出す
@@ -21,7 +20,7 @@ public class ResultLogic {
 	 * @return
 	 * オススメのリスト。最小４（ハードコーディング）個で、同率4位だった全ての項目を含む。
 	 */
-	public List<Result> choiceResults(List<Question> questions,List<Integer> selects){
+	public ArrayList<Result> choiceResults(ArrayList<Question> questions,ArrayList<Integer> selects){
 		//回答による配点バランス
 		final int[] balance= {150,120,100,70,60};
 
@@ -57,14 +56,14 @@ public class ResultLogic {
 	 * @return
 	 * index:0から順に近さの値を入れたInteger配列
 	 */
-	private List<Integer> calcAllResultCloseness(Result user){
+	private ArrayList<Integer> calcAllResultCloseness(Result user){
 		//全データを代入しインスタンス内で扱えるようにする
 		allResultData = new MeganatorDAO().selectAllResults();
 		//nullチェック
 		if(allResultData == null) return null;
 
 		//返り値用変数
-		List<Integer> result = new ArrayList<>();
+		ArrayList<Integer> result = new ArrayList<>();
 
 		//順に入れていく
 		for(int i=0;i<allResultData.size();i++) {
@@ -95,9 +94,9 @@ public class ResultLogic {
 	 * 最低[取得件数]個の要素が入ったオススメ内容を示すResultデータ。
 	 * 同率[取得件数]位の要素全てが入る。
 	 */
-	public List<Result> pickUpResult(List<Integer> closeness,int number){
+	public ArrayList<Result> pickUpResult(ArrayList<Integer> closeness,int number){
 		//返り値用変数
-		List<Result> list = new ArrayList<>();
+		ArrayList<Result> list = new ArrayList<>();
 
 		//nullチェック
 		if(closeness == null || allResultData == null) return null;
