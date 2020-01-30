@@ -44,7 +44,7 @@ public class ResultLogic {
 		mad= mad * 10 / questions.size() / 100;
 		sad= sad * 10 / questions.size() / 100;
 
-		Result you = new Result(0, "you", happy, mad, sad, joy);
+		Result you = new Result(0, "you", happy, mad, sad, joy, null);
 
 		return pickUpResult(calcAllResultCloseness(you), 4);
 	}
