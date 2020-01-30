@@ -112,8 +112,8 @@ public class MeganatorDAO {
 				int mad = rs.getInt(4);
 				int sad = rs.getInt(5);
 				int joy = rs.getInt(6);
-				String imageFile = rs.getString(7);
-				list.add(new Result(id, question_text, happy, mad, sad, joy, imageFile));
+				String imageName = rs.getString(7);
+				list.add(new Result(id, question_text, happy, mad, sad, joy, imageName));
 			}
 
 			return list;
