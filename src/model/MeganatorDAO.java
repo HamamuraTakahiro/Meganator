@@ -16,7 +16,7 @@ public class MeganatorDAO {
 	static final String URL = ADDRESS+DATABASE_NAME+PROPATIES;
 	//DB接続用・ユーザ定数
 	static final String USER = "root";
-	static final String PASS = "root";
+	static final String PASS = "2020mgt";
 
 	/**
 	 * int配列の数値に対応したIDを持つデータをQUESTIONSテーブルから呼び、

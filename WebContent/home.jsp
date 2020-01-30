@@ -70,7 +70,7 @@
 								<button id="btnHide3">Submit</button>
 							</p>
 							<p>
-							<form action="servlet/Home" method="post">
+						<form action="servlet/Home" method="post">
 							<div class="formBtn">
 								<input id="Hidebutton" type="submit" value="Result">
 							</div>
