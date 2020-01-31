@@ -1,5 +1,7 @@
 package dao;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +24,21 @@ public class MeganatorDAO {
 	static final String USER = "test";
 	static final String PASS = "";
 
+	private static Connection getConnection() throws URISyntaxException, SQLException {
+		// heroku configに設定されている値を取得。
+		System.out.println("*******" + System.getenv("CLEARDB_DATABASE_URL"));
+		URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+		System.out.println(dbUri);
+		// :をデリミタとして必要な情報を抜き取る。
+		String username = dbUri.getUserInfo().split(":")[0];
+		String password = dbUri.getUserInfo().split(":")[1];
+		// JDBC用のURLを生成。
+		String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
+		return DriverManager.getConnection(dbUrl, username, password);
+	}
+
 	/**
 	 * int配列の数値に対応したIDを持つデータをQUESTIONSテーブルから呼び、
 	 * Qusestionクラスに格納してリストで返す
@@ -40,7 +57,8 @@ public class MeganatorDAO {
 		//DB接続～returnまで
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
+			Connection conn = getConnection();
+			PreparedStatement stt = conn.prepareStatement(sql);
 
 			for(int i=0;i<ids.length;i++) {
 				stt.setInt(i+1, ids[i]);
@@ -63,7 +81,7 @@ public class MeganatorDAO {
 			}
 			//成功時
 			return list;
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return null;
@@ -81,7 +99,8 @@ public class MeganatorDAO {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(URL,USER,PASS);
+			Connection conn = getConnection();
+
 			PreparedStatement stt = conn.prepareStatement(sql);
 			ResultSet rs = stt.executeQuery();
 			if(rs.next()) {
@@ -89,42 +108,27 @@ public class MeganatorDAO {
 			}
 			//数なので不正の場合負の値を返すように
 			return -1;
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-			return -1;
-		} catch (ClassNotFoundException e) {
+		} catch (SQLException |ClassNotFoundException | URISyntaxException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return -1;
 		}
 	}
 
-	/**
-	 * QUESTIONSテーブルにあるデータのIDの一覧を返します。
-	 * 要素番号をIDで直接指定するのに利用します。
-	 * @return
-	 * QUESTIONSテーブルにあるIDをIndexの小さい順で並べたIDを値に持つArrayList
-	 */
 	public List<Integer> questionsIdList(){
-		//返り値用変数
 		List<Integer> list = new ArrayList<>();
 		String sql = "SELECT id FROM questions";
 		try {
-			//接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
+			Connection conn = getConnection();
+			PreparedStatement stt = conn.prepareStatement(sql);
 
-			//結果の取得
 			ResultSet rs = stt.executeQuery();
 			while(rs.next()) {
 				list.add( rs.getInt(1));
 			}
-
-			//上手くいったばあいのみ値を返す
 			return list;
-		}catch(Exception e) {
-			//例外処理
+		}catch(SQLException| ClassNotFoundException | URISyntaxException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -144,7 +148,8 @@ public class MeganatorDAO {
 		//DB接続～結果の取得～returnまで
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
+			Connection conn = getConnection();
+			PreparedStatement stt = conn.prepareStatement(sql);
 
 			ResultSet rs = stt.executeQuery();
 
@@ -160,11 +165,7 @@ public class MeganatorDAO {
 			}
 
 			return list;
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return null;
