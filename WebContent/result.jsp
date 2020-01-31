@@ -49,11 +49,11 @@
 	<%} %>
 
 	</div>
-    
+
 	<!-- 各種リンクの作成 -->
 	<div class="Link">
 		<div class="linkImg">
-			<a href="<% application.getRequestDispatcher("/src/serblet/HomeServlet.java/").forward(request, response);%>">
+			<a href="">
 				<img alt="" src=${pageContext.request.contextPath}/image/return.png>
 			</a>
 			<a href="https://www.google.com/?hl=ja"><img alt="" src=${pageContext.request.contextPath}/image/end.png></a>
