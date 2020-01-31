@@ -32,19 +32,15 @@ public class QuestionLogic {
 	while(count < QUEST_AMOUNT) {
 
 		//Idの範囲内からランダムな数字を選出
-		int currentNum = r.nextInt(numberOfQuestions) + 1;
+		int currentNum = r.nextInt(numberOfQuestions);
 
-		//allIdListになかったら取り直し
-		if(!allIdList.contains(currentNum)) {
-			continue;
-		}
 		//被ったらcontinue
-		if(idSet.contains(currentNum) == true) {
+		if(idSet.contains(allIdList.get(currentNum)) == true) {
 			continue;
 		}
 		//被りがなければ格納してカウンターを加算する
-		if(idSet.contains(currentNum) == false) {
-			idSet.add(currentNum);
+		if(idSet.contains(allIdList.get(currentNum)) == false) {
+			idSet.add(allIdList.get(currentNum));
 			count++;
 		}
 	}

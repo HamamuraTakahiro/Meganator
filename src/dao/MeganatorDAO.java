@@ -102,7 +102,7 @@ public class MeganatorDAO {
 
 	public List<Integer> idList(){
 		List<Integer> list = new ArrayList<>();
-		String sql = "SELECT id * FROM questions";
+		String sql = "SELECT id FROM questions";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
