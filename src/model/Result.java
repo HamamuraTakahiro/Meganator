@@ -48,8 +48,8 @@ public class Result implements Serializable {
 
 	public void setJoy(int joy) { this.joy = joy; }
 
-	public String getImagePath() { return imageName; }
+	public String getImageName() { return imageName; }
 
-	public void setImagePath(String imageName) { this.imageName = imageName; }
+	public void setImageName(String imageName) { this.imageName = imageName; }
 
 }
