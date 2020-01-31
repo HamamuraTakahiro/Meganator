@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Question;
 import model.Result;
+import service.QuestionLogic;
 
 public class MeganatorDAO {
 	//DB接続用定数
@@ -98,6 +100,24 @@ public class MeganatorDAO {
 		}
 	}
 
+	public List<Integer> idList(){
+		List<Integer> list = new ArrayList<>();
+		String sql = "SELECT id * FROM questions";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
+
+			ResultSet rs = stt.executeQuery();
+			while(rs.next()) {
+				list.add( rs.getInt(1));
+			}
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	/**
 	 * 結果DBの全体をリスト形式で返すメソッド
 	 * @return
@@ -145,22 +165,12 @@ public class MeganatorDAO {
 	 */
 	public static void main(String[] args) {
 
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(URL,USER,PASS);
-			String sql ="SELECT * FROM questions";
-			PreparedStatement stt = conn.prepareStatement(sql);
-
-			ResultSet rs = stt.executeQuery();
-			while(rs.next()) {
-				System.out.print(rs.getObject(1));
-				System.out.print(",");
-				System.out.print(rs.getObject(2));
-				System.out.println();
+		QuestionLogic ql = new QuestionLogic();
+		List<Question> questionList = ql.choiceRamdomQuestions();
+		for(Question quest : questionList) {
+			if(quest !=null) {
+				System.out.println("["+quest.getId()+" , "+quest.getQuestion_text()+"]");
 			}
-
-		}catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 }
