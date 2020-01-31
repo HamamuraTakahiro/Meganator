@@ -13,8 +13,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="js/sample.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="WEB-INF/css/result.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/result.css">
 
@@ -49,11 +47,13 @@
 	</div>
 
 <% } %>
-<!-- 各種リンクの作成 -->
+	<!-- 各種リンクの作成 -->
 	<div class="Link">
 		<div class="linkImg">
-			<a href=""><img alt="" src=${pageContext.request.contextPath}/image/return.png></a>
-			<a href=""><img alt="" src=${pageContext.request.contextPath}/image/end.png></a>
+			<a href="<% application.getRequestDispatcher("/src/serblet/HomeServlet.java/").forward(request, response);%>">
+				<img alt="" src=${pageContext.request.contextPath}/image/return.png>
+			</a>
+			<a href="https://www.google.com/?hl=ja"><img alt="" src=${pageContext.request.contextPath}/image/end.png></a>
 		</div>
 	</div>
 
