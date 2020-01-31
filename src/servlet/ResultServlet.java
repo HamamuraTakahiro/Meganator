@@ -56,7 +56,7 @@ public class ResultServlet extends HttpServlet {
 		request.getSession().removeAttribute(TEN_QUESTIONS);
 		request.getSession().removeAttribute(ANSWER_LIST);
 		/*Result.jspにフォワード*/
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/META-INF/result.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
 		dispatcher.forward(request, response);
 	}
 

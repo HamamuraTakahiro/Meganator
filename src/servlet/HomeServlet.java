@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Question;
-import model.Result;
 import service.QuestionLogic;
-import service.ResultLogic;
 
 @WebServlet("/Home")
 public class HomeServlet extends HttpServlet {
@@ -53,26 +51,26 @@ public class HomeServlet extends HttpServlet {
 		*/
 		HttpSession session = request.getSession();
 		ArrayList<Integer> answerList = (ArrayList<Integer>)session.getAttribute(ANSWER_LIST);
-		answerList.add(Integer.parseInt(request.getParameter(ANSWER)));
-		session.setAttribute(ANSWER_LIST, answerList);
+
+		//もしnullだった場合もう一度
+		if(answerList == null) {
+			response.sendRedirect("Home");
+		}
 
 		//質問が何回目か数えてる。
 		int count = answerList.size();
-		if(count >= 10) {
-			//10個の答えをもらったらResultServlet.javaに処理をリダイレクト
-			ResultLogic resultLogic = new ResultLogic();
-			ArrayList<Result> results = resultLogic.choiceResults((ArrayList<Question>)session.getAttribute(TEN_QUESTIONS), answerList);
-			session.setAttribute(RESULTS, results);
-			response.sendRedirect("/Meganator/ResultServlet");
+
+		//回答数が足りない場合
+		if(count < ((ArrayList<Question>)session.getAttribute(TEN_QUESTIONS)).size()) {
+			//セッションスコープを空にしてもう一度doGetから
+			session.setAttribute(ANSWER_LIST, null);
+			session.setAttribute(TEN_QUESTIONS, null);
+			response.sendRedirect("Home");
 		}
 
-		//答えが9個以下の場合はまた尋ねる
-		ArrayList<Question> tenQuestions = (ArrayList<Question>)session.getAttribute(TEN_QUESTIONS);
+		//回答数が足りていた場合
+		response.sendRedirect("Result");
 
-		request.setAttribute(QUESTION_TEXT, tenQuestions.get(count));
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-		dispatcher.forward(request, response);
 
 	}
 

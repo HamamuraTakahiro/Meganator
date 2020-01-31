@@ -5,9 +5,10 @@
 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Result" %>
+<%@ page import="config.Constant_text" %>
 <%
 	//スコープからリストを取得
-	ArrayList<Result> resultList = (ArrayList<Result>) session.getAttribute("ADVICES");
+	ArrayList<Result> resultList = (ArrayList<Result>)session.getAttribute(Constant_text.ADVICES);
 %>
 <head>
 <meta charset="UTF-8">
@@ -26,27 +27,29 @@
 	<div class="container">
 
 		<!-- cardに値を格納してListのサイズ分だけ作成(引数名は仮で入れてます) -->
-
+	<%if(resultList != null){ %>
 		<% for(int i = 0; i < resultList.size(); i++) { %>
 
-
 			<!-- section(カード内の要素)タグの設定-->
-
-				<section class="card">
+			<section class="card">
 
 			<!-- カードの上部に来る画像の設定 -->
-						<a href= https://www.google.com/?hl=ja>
-							<img src=${pageContext.request.contextPath}/image/<% resultList.get(i).getImagePath(); %>>
-						</a>
+			<a href= https://www.google.com/?hl=ja>
+				<img src=${pageContext.request.contextPath}/image/<% resultList.get(i).getImageName(); %>>
+			</a>
 
 			<!-- カードのテキストの設定 -->
-				<div class="card-content">
-					<h1 class="card-title"><% resultList.get(i).getText(); %></h1>
-				</div>
+			<div class="card-content">
+				<h1 class="card-title"><% resultList.get(i).getText(); %></h1>
+			</div>
+		<% } %>
+	<%}else{ %>
+	<!-- Attributeの取得に失敗したとき -->
+		null
+	<%} %>
 
 	</div>
-
-<% } %>
+    
 	<!-- 各種リンクの作成 -->
 	<div class="Link">
 		<div class="linkImg">
