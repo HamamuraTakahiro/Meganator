@@ -12,13 +12,13 @@ import model.Result;
 
 public class MeganatorDAO {
 	//DB接続用定数
-	static final String DATABASE_NAME = "meganater_protor";
+	static final String DATABASE_NAME = "meganator_proto";
 	static final String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
 	static final String ADDRESS = "jdbc:mySQL://localhost/";
 	static final String URL = ADDRESS+DATABASE_NAME+PROPATIES;
 	//DB接続用・ユーザ定数
-	static final String USER = "root";
-	static final String PASS = "2020mgt";
+	static final String USER = "test";
+	static final String PASS = "";
 
 	/**
 	 * int配列の数値に対応したIDを持つデータをQUESTIONSテーブルから呼び、
@@ -148,7 +148,7 @@ public class MeganatorDAO {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL,USER,PASS);
-			String sql ="SELECT * FROM TEST";
+			String sql ="SELECT * FROM questions";
 			PreparedStatement stt = conn.prepareStatement(sql);
 
 			ResultSet rs = stt.executeQuery();
