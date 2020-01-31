@@ -68,7 +68,7 @@
 										<%
 											} else {
 										%>
-									
+
 									<p id="question"><%=question.get(0).getQuestion_text()%></p>
 									<%
 										}

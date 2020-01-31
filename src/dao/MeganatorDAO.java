@@ -12,13 +12,13 @@ import model.Result;
 
 public class MeganatorDAO {
 	//DB接続用定数
-	static final String DATABASE_NAME = "Meganator";
+	static final String DATABASE_NAME = "meganater_protor";
 	static final String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
 	static final String ADDRESS = "jdbc:mySQL://localhost/";
 	static final String URL = ADDRESS+DATABASE_NAME+PROPATIES;
 	//DB接続用・ユーザ定数
 	static final String USER = "root";
-	static final String PASS = "root";
+	static final String PASS = "2020mgt";
 
 	/**
 	 * int配列の数値に対応したIDを持つデータをQUESTIONSテーブルから呼び、
