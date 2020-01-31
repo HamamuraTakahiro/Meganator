@@ -42,6 +42,8 @@
 			<div class="card-content">
 				<h1 class="card-title"><% resultList.get(i).getText(); %></h1>
 			</div>
+
+		</section>
 		<% } %>
 	<%}else{ %>
 	<!-- Attributeの取得に失敗したとき -->
