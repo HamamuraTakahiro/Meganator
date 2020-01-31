@@ -13,6 +13,11 @@ $(function () {
     $('#show').click(function () {
         console.log('クリックされました！');
         $('#Hidetext1').show();
+        $('#show').hide();
+        $('textdeleate').hide();
+        $('#question').show();
+
+
     })
 
     $('#btnHide1').click(function () {
