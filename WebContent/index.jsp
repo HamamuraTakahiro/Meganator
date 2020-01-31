@@ -77,13 +77,29 @@
 								</div>
 							</div>
 						</div>
+						<%if(question == null){ %>
 						<form action="
-						Home" method="get">
+						Home" method="get" >
+
 							<div class="formBtn">
 								<input id="show" type="submit" value="スタート"
 									class="formBtn__submit">
 							</div>
+
 						</form>
+
+						<%}else{
+						ArrayList<Integer> answers=new ArrayList<Integer>();
+						for(int i=0;i<10;i++){
+							answers.add(new java.util.Random().nextInt(5));
+						}
+						session.setAttribute(Constant_text.ANSWER_LIST, answers);
+						%>
+						<form action="Home" method="post">
+								<input type="hidden" name="<%=Constant_text.ANSWER %>" value="1">
+								<input type="submit" value="結果を見る">
+						</form>
+						<%} %>
 
 						<div>
 							<p id="Hidetext1">
