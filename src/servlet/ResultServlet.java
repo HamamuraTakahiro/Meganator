@@ -35,6 +35,7 @@ public class ResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute(ADVICES) == null) {
 		ArrayList<Question> quests =(ArrayList<Question>)request.getSession().getAttribute(TEN_QUESTIONS);
 		ArrayList<Integer> answers =(ArrayList<Integer> )request.getSession().getAttribute(ANSWER_LIST);
 		/**
@@ -51,13 +52,20 @@ public class ResultServlet extends HttpServlet {
 		}else {
 			ArrayList<Result> advice = new ResultLogic().choiceResults(quests, answers);
 			request.getSession().setAttribute(ADVICES, advice);
+
+			/*セッションスコープを破棄*/
+			request.getSession().removeAttribute(TEN_QUESTIONS);
+			request.getSession().removeAttribute(ANSWER_LIST);
+
+			/*Result.jspにフォワード*/
+			RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
+			dispatcher.forward(request, response);
 		}
-		/*セッションスコープを破棄*/
-		request.getSession().removeAttribute(TEN_QUESTIONS);
-		request.getSession().removeAttribute(ANSWER_LIST);
-		/*Result.jspにフォワード*/
-		RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
-		dispatcher.forward(request, response);
+		}else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
+			dispatcher.forward(request, response);
+		}
+
 	}
 
 	/**
