@@ -14,7 +14,12 @@ public class ResultLogic {
 	private ArrayList<Result> allResultData;
 
 	/**
-	 * 回答した質問と回答内容からオススメを出す
+	 * 回答した質問と回答内容からオススメを出す。
+	 * 質問の持つ喜怒哀楽パラメータに回答から重みづけをして加算し、
+	 * RESULTテーブルのもつ喜怒哀楽パラメータのスケールに合わせて、
+	 * 各結果データとの「近さ」を一つの指標として出す。
+	 * それらを比較して、近いものから結果リストに格納して出力する。
+	 *
 	 * @param questions
 	 * 回答した質問。
 	 * @param selects
@@ -23,7 +28,8 @@ public class ResultLogic {
 	 * オススメのリスト。最小４（ハードコーディング）個で、同率4位だった全ての項目を含む。
 	 */
 	public ArrayList<Result> choiceResults(ArrayList<Question> questions,ArrayList<Integer> selects){
-		//回答による配点バランス
+		//回答による配点バランス(根拠なし)
+		//平均は100になるように調整している。ここを変える場合圧縮時に調整すること。
 		final int[] balance= {150,120,100,70,60};
 
 		//合計用４値
@@ -40,12 +46,13 @@ public class ResultLogic {
 			mad+=questions.get(i).getMad() * balance[selects.get(i)];
 		}
 
-		//割合で圧縮
+		//割合で圧縮する。配点バランスを変更するときに最後の圧縮率を変えること。
 		happy = happy * 10 / questions.size() / 100;
 		joy= joy * 10 / questions.size() /  100;
 		mad= mad * 10 / questions.size() / 100;
 		sad= sad * 10 / questions.size() / 100;
 
+		//ユーザーの感情をResult型として扱うためにインスタンス生成
 		Result you = new Result(0, "you", happy, mad, sad, joy, null);
 
 		return pickUpResult(calcAllResultCloseness(you), 4);
