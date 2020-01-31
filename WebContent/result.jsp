@@ -35,12 +35,12 @@
 
 			<!-- カードの上部に来る画像の設定 -->
 			<a href= https://www.google.com/?hl=ja>
-				<img src=${pageContext.request.contextPath}/image/<% resultList.get(i).getImageName(); %>>
+				<img src=${pageContext.request.contextPath}/image/<%= resultList.get(i).getImageName() %>>
 			</a>
 
 			<!-- カードのテキストの設定 -->
 			<div class="card-content">
-				<h1 class="card-title"><% resultList.get(i).getText(); %></h1>
+				<h1 class="card-title"><%= resultList.get(i).getText() %></h1>
 			</div>
 
 		</section>
