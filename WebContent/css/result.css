@@ -1,69 +1,55 @@
 .body {
-	background: rgb(241, 0, 0);
+	background-color: #f8f8ff; /* 背景色 */
 }
 
 .header{
-	max-width: 100%;
-	margin: 0 auto;
-	text-align: center;
+	max-width: 100%; /* 画像の最大幅 */
+	margin: 0 auto; /* 余白 */
+	text-align: center; /* 中央寄せ */
 }
 
 
-.container{
-	display:flex;
-	display:-webkit-flex;
-	display:-webkit-box;
-	display:-moz-box;
-	display:-ms-flexbox;
-	display:-webkit-flex;
-	display:-moz-flex;
-	flex-wrap:wrap;
-	justify-content:space-between;
+.container{ /*カードを並べる入れ物*/
+	display:flex; /*入れ物の大きさをカードの数に応じて並べる*/
+	display:-webkit-flex; /*処理自体は同じ*/
+	display:-moz-flex;/*ブラウザーのバージョン別に対応するための記述*/
+	flex-wrap:wrap; /*入れ物から要素がはみ出たら折り返して配置する*/
+	justify-content:space-between; /*入れ物の中で均等配置*/
 }
 
 
 
 .card {
-	width: 48%;
-	background: #87cefa;
-	border-radius: 5px;
-	box-shadow: 0 2px 5px #ccc;
-	margin: 10px
+	width: 48%; /*カード一つ当たりの横幅*/
+	background: #87cefa; /* カードの色 */
+	border-radius: 5px;/* 角とり、数値が大きいほど角が丸くなる */
+	box-shadow: 0 2px 5px #ccc; /* カードに影を設定する */
+	margin: 10px /*カードとカードの間をどれぐらい取るか*/
 }
 .card-img {
-	width: 100%;    /* 横幅を割合で指定 */
-	height: 300px;  /* 高さは自動指定 */
-	object-fit: cover;
-	border-radius: 5px 5px 0 0;
-	max-width: 100%;
+	width: 100%;    /* 画像の横幅(割合で指定) */
+	height: 300px;  /* 画像の高さ */
+	object-fit: cover; /*アスペクト比を維持しつつ拡大*/
+	border-radius: 5px 5px 0 0;/*角取り*/
+	max-width: 100%; /*要素の最大幅*/
 }
 
 .linkImg{
-	display:flex;
-	display:-webkit-flex;
-	display:-webkit-box;
-	display:-moz-box;
-	display:-ms-flexbox;
-	display:-webkit-flex;
-	display:-moz-flex;
-	flex-wrap:wrap;
-	justify-content:space-around;
-	text-align: center
+	display:flex; /* フレックスボックス化 */
+	display:-webkit-flex; /* バージョン別対応 */
+	display:-moz-flex; /* バージョン別対応 */
+	justify-content:space-around; /* リンクの均等配置 */
 }
 
 
 
 .card-content {
-	padding: 20px;
+	padding: 20px; /*テキストとボックスの余白*/
 }
 
 .card-title {
-	font-family: monospace;
-	font-size: 20px;
-	margin-bottom: 20px;
-	text-align: center;
-	color: #333;
+	font-family: monospace; /* テキストのフォント*/
+	font-size: 20px; /* フォントサイズ */
+	text-align: center; /* 中央よせ */
+	color: #cd5c5c; /*フォントの色*/
 }
-
-body {
-	background-color: #f8f8ff
