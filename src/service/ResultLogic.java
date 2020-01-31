@@ -1,8 +1,6 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import dao.MeganatorDAO;
 import model.Question;
@@ -104,25 +102,25 @@ public class ResultLogic {
 		//nullチェック
 		if(closeness == null || allResultData == null) return null;
 
-		//何番目のResultがどれくらいの近さを持っているかをMapに配分する
-		Map<Integer, Integer> distanceMap = new LinkedHashMap<>();
-		for(int i=0;i<closeness.size();i++) {
-			distanceMap.put(i,closeness.get(i));
-		}
-
 		//近さ:0から順に、「その値を持つキーの持つindexをもつResult」を格納、一致した場合削除
 		//その近さを値にもつ要素がないこと確認し、近さを増やす。
-		int currentDistance=0;
+		int currentDistance = 0;
+		//4つを超えるまでやる
 		while(list.size() < number) {
-			if(distanceMap.containsValue(currentDistance)) {
-				for(int index = 0;index < distanceMap.size();index++) {
-					if(Integer.valueOf(currentDistance).equals(distanceMap.get(index))) {
+			//「近さリスト」の中にその近さがあるなら（計算時間短縮用）
+			if(closeness.contains(currentDistance)) {
+
+				//「リザルト全体の何番目にあるデータが近い」ことを利用して返り値リストに加える
+				for(int index = 0;index < closeness.size();index++) {
+
+					if(closeness.get(index) == currentDistance) {
 						list.add(allResultData.get(index));
-						distanceMap.remove(index);
 					}
+
 				}
 			}
-			if(!distanceMap.containsValue(currentDistance)) currentDistance++;
+			//「その近さ」の処理が終わったら遠くしていく
+			currentDistance++;
 		}
 
 		//場合によってはnumber個より多い場合もある。
