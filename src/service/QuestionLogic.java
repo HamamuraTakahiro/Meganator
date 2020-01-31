@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Random;
 
 import dao.MeganatorDAO;
@@ -13,7 +14,7 @@ public class QuestionLogic {
 	public ArrayList<Question> choiceRamdomQuestions() {
 
 	//重複なし乱数格納用のSetの作成
-	LinkedHashSet<Integer> idListSet = new LinkedHashSet<Integer>();
+	LinkedHashSet<Integer> idSet = new LinkedHashSet<Integer>();
 	//ランダムインスタンスの作成
 	Random r = new Random();
 
@@ -22,33 +23,34 @@ public class QuestionLogic {
 
 	//DAO用のインスタンスの生成
 	MeganatorDAO meganatorDAO = new MeganatorDAO();
+	List<Integer> allIdList = meganatorDAO.idList();
 	//質問数の設定
-	int numberOfQuestions = meganatorDAO.countAllQuestions();
+	int numberOfQuestions = allIdList.size();
 
 
 	//while文でランダムに数字を選出してIdを格納する
 	while(count < QUEST_AMOUNT) {
 
-			//Idの範囲内からランダムな数字を選出
-			int currentNum = r.nextInt(numberOfQuestions) + 1;
+		//Idの範囲内からランダムな数字を選出
+		int currentNum = r.nextInt(numberOfQuestions);
 
-			//被ったらcontinue
-				if(idListSet.contains(currentNum) == true) {
-					continue;
-			}
-			//被りがなければ格納してカウンターを加算する
-				if(idListSet.contains(currentNum) == false) {
-					idListSet.add(currentNum);
-					count++;
-				}
-			}
+		//被ったらcontinue
+		if(idSet.contains(allIdList.get(currentNum)) == true) {
+			continue;
+		}
+		//被りがなければ格納してカウンターを加算する
+		if(idSet.contains(allIdList.get(currentNum)) == false) {
+			idSet.add(allIdList.get(currentNum));
+			count++;
+		}
+	}
 		//配列に変換
-		Integer[] integerArray = new Integer[idListSet.size()];
-		idListSet.toArray(integerArray);
+		Integer[] integerArray = new Integer[idSet.size()];
+		idSet.toArray(integerArray);
 
 		//int配列に変換
-		int[] idList = new int[idListSet.size()];
-		for(int i=0;i<idListSet.size();i++) {
+		int[] idList = new int[idSet.size()];
+		for(int i=0;i<idSet.size();i++) {
 			idList[i]=integerArray[i];
 		}
 
