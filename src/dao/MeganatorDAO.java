@@ -100,19 +100,31 @@ public class MeganatorDAO {
 		}
 	}
 
-	public List<Integer> idList(){
+	/**
+	 * QUESTIONSテーブルにあるデータのIDの一覧を返します。
+	 * 要素番号をIDで直接指定するのに利用します。
+	 * @return
+	 * QUESTIONSテーブルにあるIDをIndexの小さい順で並べたIDを値に持つArrayList
+	 */
+	public List<Integer> questionsIdList(){
+		//返り値用変数
 		List<Integer> list = new ArrayList<>();
 		String sql = "SELECT id FROM questions";
 		try {
+			//接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(URL,USER,PASS);			PreparedStatement stt = conn.prepareStatement(sql);
 
+			//結果の取得
 			ResultSet rs = stt.executeQuery();
 			while(rs.next()) {
 				list.add( rs.getInt(1));
 			}
+
+			//上手くいったばあいのみ値を返す
 			return list;
 		}catch(Exception e) {
+			//例外処理
 			e.printStackTrace();
 			return null;
 		}

@@ -23,7 +23,7 @@ public class QuestionLogic {
 
 	//DAO用のインスタンスの生成
 	MeganatorDAO meganatorDAO = new MeganatorDAO();
-	List<Integer> allIdList = meganatorDAO.idList();
+	List<Integer> allIdList = meganatorDAO.questionsIdList();
 	//質問数の設定
 	int numberOfQuestions = allIdList.size();
 
