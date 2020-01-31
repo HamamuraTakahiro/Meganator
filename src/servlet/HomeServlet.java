@@ -36,7 +36,7 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute(TEN_QUESTIONS, tenQuestions);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 
 	}
