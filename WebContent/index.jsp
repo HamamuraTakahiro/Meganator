@@ -6,6 +6,7 @@
 <%
 	//セッションスコープからインスタンスを取得
 	ArrayList<Question> question = (ArrayList<Question>) session.getAttribute(Constant_text.TEN_QUESTIONS);
+  //コメントの追加
 %>
 
 <!DOCTYPE html>
