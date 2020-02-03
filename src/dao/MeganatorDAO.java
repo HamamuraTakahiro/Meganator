@@ -20,6 +20,7 @@ public class MeganatorDAO {
 	static final String PROPATIES = "?characterEncoding=UTF-8&serverTimezone=JST";
 	static final String ADDRESS = "jdbc:mySQL://localhost/";
 	static final String URL = ADDRESS+DATABASE_NAME+PROPATIES;
+
 	//DB接続用・ユーザ定数
 	static final String USER = "test";
 	static final String PASS = "";
